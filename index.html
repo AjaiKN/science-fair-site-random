@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head></head>
+<body>
+    <script src="model.js"></script>
+    <script>
+        //alert(new RandomForestClassifier().predict([2,2,5,2,0,3,2,2,1,2,4,5,5,2,1.84210526315789,3,4,5,3,5,6,6,5,2,1,2,2,2,1,1,1,1,1,1,1,0,0,0,0,1]))
+        //alert(new RandomForestClassifier().predict([2,2,3,0,2,6,2,2,0,2,5,2,5,1,1.68421052631579,5,4,4,4,3,11,6,4,1,1,4,2,1,1,1,1,1,1,1,1,0,1,0,0,0]))
+        
+        const classifier = new RandomForestClassifier();
+        classifier.predict = function(features) {
+            var classes = new Array(2).fill(0);
+            for (var i = 0; i < classifier.trees.length; i++) {
+                classes[classifier.trees[i](features)]++;
+            }
+            return classes[0] / (classes[0] + classes[1]);
+        }
+    </script>
+    <script src="features.js"></script>
+    <div id="">
+        <input id="sequenceInput" type="text" onInput="inputChanged()" />
+        <p id="output"></p>
+    </div>
+    <script>
+        inputChanged();
+        function inputChanged() {
+            document.getElementById("sequenceInput").value = document.getElementById("sequenceInput").value.split("").filter(char => ["1","2","3","4","5"].includes(char)).join("");
+            const input = document.getElementById("sequenceInput");
+            const str = input.value;
+            const output = document.getElementById("output");
+            const stuff = validateString(str);
+            output.innerText = stuff.message;
+        }
+    </script>
+</body>
+</html>
