@@ -25,7 +25,7 @@
     <script>
         inputChanged();
         function inputChanged() {
-            document.getElementById("sequenceInput").value = document.getElementById("sequenceInput").value.split("").filter(char => ["1","2","3","4","5"].includes(char)).join("");
+            document.getElementById("sequenceInput").value = document.getElementById("sequenceInput").value.split("").filter(char => ["1","2","3","4","5"].includes(char)).join("").substring(0, 20);
             const input = document.getElementById("sequenceInput");
             const str = input.value;
             const output = document.getElementById("output");
